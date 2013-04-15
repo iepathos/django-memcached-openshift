@@ -1,4 +1,4 @@
-Django on OpenShift with Memcached
+Django with Memcached on OpenShift 
 ==================================
 
 ## This repo is a clone of the main [openshift-django-example](https://github.com/openshift/django-example)
