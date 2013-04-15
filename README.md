@@ -7,7 +7,7 @@ Django on OpenShift with Memcached
 + Install python-memcached [setup.py](https://github.com/iepathos/django-memcached-openshift/blob/master/setup.py#L12)
 + Hook memcached up to Django caching [wsgi/openshift/settings.py](https://github.com/iepathos/django-memcached-openshift/blob/master/wsgi/openshift/settings.py#L167)
 
-#### Alternatively, follow the directions below to install off of this repo.
+#### Or just follow the directions below and install off of this repo.
 
 This git repository helps you get up and running quickly w/ a Django
 installation on OpenShift with Memcached.  The Django project name 
