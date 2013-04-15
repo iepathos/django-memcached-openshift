@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-# Django settings for openshift project.
+# Django settings for OpenShift project with Memcached caching backend.
 import imp, os
+
+from datetime import datetime, timedelta
 
 # a setting to determine whether we are running on OpenShift
 ON_OPENSHIFT = False
@@ -8,6 +10,7 @@ if os.environ.has_key('OPENSHIFT_REPO_DIR'):
     ON_OPENSHIFT = True
 
 PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
+
 if ON_OPENSHIFT:
     DEBUG = False
 else:
@@ -155,6 +158,30 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+########################### caching #################################
+CACHE_PORT = '11211'
+# Production Environment
+if ON_OPENSHIFT:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '%s:%s' % (os.environ['OPENSHIFT_INTERNAL_IP'], CACHE_PORT),
+        }
+    }
+
+    CACHE_VIEW_LENGTH = datetime.now() + timedelta(30) # 30 day cache expiration
+
+# Development Environment
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:%s' % CACHE_PORT,
+        }
+    }
+
+    CACHE_VIEW_LENGTH = 0 # Set to 0 for development
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

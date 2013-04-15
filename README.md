@@ -1,10 +1,16 @@
-Django on OpenShift
-===================
+Django on OpenShift with Memcached
+==================================
+
+### This repo is a clone of the main openshift django example repo.
+### Only 3 files need to be changed to get memcached working.
+#### .openshift/action_hooks/build
+#### setup.py
+#### wsgi/openshift/settings.py
 
 This git repository helps you get up and running quickly w/ a Django
-installation on OpenShift.  The Django project name used in this repo
-is 'openshift' but you can feel free to change it.  Right now the
-backend is sqlite3 and the database runtime is found in
+installation on OpenShift with Memcached.  The Django project name 
+used in this repo is 'openshift' but you can feel free to change it.  
+Right now the backend is sqlite3 and the database runtime is found in
 `$OPENSHIFT_DATA_DIR/sqlite3.db`.
 
 Before you push this app for the first time, you will need to change
